@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Central Allana — Maxibell</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg-deep:    #0D1B2E;
+  --bg-mid:     #0F2240;
+  --bg-card:    rgba(255,255,255,0.06);
+  --bg-card-h:  rgba(255,255,255,0.10);
+  --border:     rgba(255,255,255,0.10);
+  --border-h:   rgba(93,173,226,0.35);
+  --azul:       #2980b9;
+  --azul-cl:    #74C0E8;
+  --azul-glow:  rgba(41,128,185,0.25);
+  --verde:      #27ae60;
+  --roxo:       #8b5cf6;
+  --amarelo:    #f59e0b;
+  --txt-1:      #f1f5f9;
+  --txt-2:      #A8BDD4;
+  --txt-3:      #607A95;
+  --trans:      .22s cubic-bezier(.4,0,.2,1);
+  --radius:     14px;
+  --radius-sm:  9px;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  font-family:'Montserrat',sans-serif;
+  background:var(--bg-deep);
+  color:var(--txt-1);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:'';
+  position:fixed;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 0%,  rgba(41,128,185,.22) 0%,transparent 55%),
+    radial-gradient(ellipse 60% 50% at 90% 100%, rgba(116,192,232,.14) 0%,transparent 55%),
+    radial-gradient(ellipse 40% 40% at 50% 50%,  rgba(30,87,153,.12)  0%,transparent 60%),
+    linear-gradient(165deg, #152845 0%, #0D1B2E 55%, #0F2240 100%);
+  pointer-events:none;
+}
+
+.topbar{
+  position:sticky;top:0;z-index:999;
+  height:52px;
+  display:flex;align-items:center;
+  padding:0 24px;gap:14px;
+  background:rgba(13,27,46,0.75);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.tb-logo{
+  font-size:12px;font-weight:800;
+  letter-spacing:2px;color:#fff;
+  background:linear-gradient(135deg,#1a3a6b,#2980b9);
+  padding:5px 13px;border-radius:7px;
+  border:1px solid rgba(93,173,226,.2);
+  box-shadow:0 0 16px rgba(41,128,185,.3);
+}
+.tb-sep{width:1px;height:16px;background:var(--border)}
+.tb-sub{font-size:9px;font-weight:600;color:var(--txt-3);letter-spacing:2.5px;text-transform:uppercase;flex:1}
+.tb-right{display:flex;align-items:center;gap:8px}
+.tb-clock{font-size:11px;font-weight:700;color:var(--azul-cl);background:rgba(41,128,185,.12);border:1px solid rgba(41,128,185,.2);border-radius:7px;padding:4px 11px;letter-spacing:.5px;font-variant-numeric:tabular-nums}
+.tb-status{display:flex;align-items:center;gap:6px;font-size:9px;font-weight:600;color:var(--txt-2);background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:20px;padding:4px 12px}
+.tb-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;box-shadow:0 0 7px #4ade80;animation:pulse 2.5s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 7px #4ade80}50%{box-shadow:0 0 14px #4ade80,0 0 28px rgba(74,222,128,.3)}}
+
+.layout{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:28px 20px 60px}
+
+.hero{background:rgba(255,255,255,.03);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;display:flex;align-items:center;gap:16px;margin-bottom:28px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(116,192,232,.5),transparent)}
+.hero::after{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(41,128,185,.10) 0%,transparent 70%);pointer-events:none}
+.hero-icon{width:48px;height:48px;border-radius:13px;background:linear-gradient(135deg,rgba(26,58,107,.9),rgba(41,128,185,.7));border:1px solid rgba(116,192,232,.25);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;box-shadow:0 4px 20px rgba(41,128,185,.25)}
+.hero-info{flex:1}
+.hero-title{font-size:18px;font-weight:800;color:#fff;line-height:1.2;letter-spacing:.3px}
+.hero-title span{background:linear-gradient(135deg,var(--azul-cl),var(--azul));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-date{font-size:10px;font-weight:500;color:var(--txt-3);margin-top:4px;letter-spacing:.5px}
+.hero-badge{display:flex;align-items:center;gap:7px;font-size:9px;font-weight:700;color:var(--azul-cl);background:rgba(41,128,185,.12);border:1px solid rgba(41,128,185,.2);border-radius:10px;padding:7px 14px;letter-spacing:.5px;white-space:nowrap}
+.hero-badge-dot{width:5px;height:5px;border-radius:50%;background:var(--azul-cl)}
+
+.sec{margin-bottom:24px}
+.sec-hdr{display:flex;align-items:center;gap:9px;margin-bottom:12px;padding-left:2px}
+.sec-icon{font-size:13px}
+.sec-label{font-size:9px;font-weight:700;color:var(--azul-cl);text-transform:uppercase;letter-spacing:3px}
+.sec-line{flex:1;height:1px;background:linear-gradient(90deg,rgba(116,192,232,.2),transparent)}
+.sec-count{font-size:8px;font-weight:700;color:var(--txt-3);background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:6px;padding:2px 8px}
+
+.grid{display:grid;gap:10px}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+.grid-1{grid-template-columns:1fr}
+
+.card{display:flex;align-items:center;gap:13px;padding:15px 16px;background:var(--bg-card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius);text-decoration:none;color:inherit;position:relative;overflow:hidden;cursor:pointer;transition:background var(--trans),border-color var(--trans),transform var(--trans),box-shadow var(--trans);animation:fadeUp .4s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.card:nth-child(1){animation-delay:.04s}
+.card:nth-child(2){animation-delay:.08s}
+.card:nth-child(3){animation-delay:.12s}
+.card::before{content:'';position:absolute;top:0;left:16px;right:16px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);transition:opacity var(--trans)}
+.card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(41,128,185,.08) 0%,transparent 60%);opacity:0;transition:opacity var(--trans)}
+.card:hover{background:var(--bg-card-h);border-color:var(--border-h);transform:translateY(-2px);box-shadow:0 8px 32px rgba(41,128,185,.15),0 2px 8px rgba(0,0,0,.3),0 0 0 1px rgba(116,192,232,.2)}
+.card:hover::after{opacity:1}
+
+.ci{width:44px;height:44px;flex-shrink:0;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:21px;position:relative;z-index:1;transition:var(--trans);border:1px solid rgba(255,255,255,.07)}
+.ci.azul  {background:linear-gradient(135deg,#112b52,#1a3a6b)}
+.ci.verde {background:linear-gradient(135deg,#0d2e1a,#145a2e)}
+.ci.roxo  {background:linear-gradient(135deg,#1e1040,#3b1f82)}
+.ci.amarel{background:linear-gradient(135deg,#2d1f00,#7c4a00)}
+.ci.laranj{background:linear-gradient(135deg,#2d1200,#7c3100)}
+.card:hover .ci.azul  {background:linear-gradient(135deg,#1E4E88,#3B9DD4);box-shadow:0 4px 16px rgba(59,157,212,.3)}
+.card:hover .ci.verde {background:linear-gradient(135deg,#145a2e,#27ae60);box-shadow:0 4px 16px rgba(39,174,96,.3)}
+.card:hover .ci.roxo  {background:linear-gradient(135deg,#3b1f82,#7c3aed);box-shadow:0 4px 16px rgba(139,92,246,.3)}
+.card:hover .ci.amarel{background:linear-gradient(135deg,#7c4a00,#d97706);box-shadow:0 4px 16px rgba(245,158,11,.3)}
+.card:hover .ci.laranj{background:linear-gradient(135deg,#7c3100,#e05d00);box-shadow:0 4px 16px rgba(224,93,0,.3)}
+
+.ct{flex:1;min-width:0;position:relative;z-index:1}
+.ct-title{font-size:11px;font-weight:700;color:var(--txt-1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px;transition:color var(--trans)}
+.card:hover .ct-title{color:var(--azul-cl)}
+.ct-sub{font-size:9px;font-weight:500;color:var(--txt-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.cbadge{font-size:7px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:3px 9px;border-radius:8px;flex-shrink:0;position:relative;z-index:1;transition:var(--trans)}
+.cbadge.verde {background:rgba(39,174,96,.12);color:#4ade80;border:1px solid rgba(74,222,128,.2)}
+.cbadge.roxo  {background:rgba(139,92,246,.12);color:#a78bfa;border:1px solid rgba(167,139,250,.2)}
+.cbadge.drive {background:rgba(245,158,11,.10);color:#fbbf24;border:1px solid rgba(251,191,36,.2)}
+.cbadge.ext   {background:rgba(224,93,0,.12);color:#fb923c;border:1px solid rgba(251,146,60,.2)}
+
+.carr{width:26px;height:26px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--txt-3);flex-shrink:0;position:relative;z-index:1;transition:var(--trans)}
+.card:hover .carr{border-color:var(--azul-cl);color:var(--azul-cl);background:rgba(116,192,232,.08);transform:translate(2px,-2px)}
+
+footer{position:relative;z-index:1;text-align:center;padding:16px 20px;border-top:1px solid var(--border);background:rgba(13,27,46,.6);backdrop-filter:blur(12px)}
+footer p{font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--txt-3)}
+footer p strong{color:var(--azul-cl);letter-spacing:3px}
+
+@media(max-width:700px){.grid-2{grid-template-columns:1fr}}
+@media(max-width:480px){.topbar{padding:0 14px}.tb-sub,.tb-clock,.hero-badge{display:none}.layout{padding:16px 12px 40px}.hero{padding:14px 16px}.hero-title{font-size:15px}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="tb-logo">MAXIBELL</div>
+  <div class="tb-sep"></div>
+  <span class="tb-sub">Central Allana</span>
+  <div class="tb-right">
+    <div class="tb-clock" id="clock">--:--</div>
+    <div class="tb-status">
+      <div class="tb-dot"></div>
+      Online
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+
+  <div class="hero">
+    <div class="hero-icon">👩‍💼</div>
+    <div class="hero-info">
+      <div class="hero-title">Central <span>Allana</span></div>
+      <div class="hero-date" id="heroDate">Sistema Operacional Interno</div>
+    </div>
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      <span id="heroGreet">Bem-vinda</span>
+    </div>
+  </div>
+
+  <!-- APLICATIVOS -->
+  <div class="sec">
+    <div class="sec-hdr">
+      <span class="sec-icon">📱</span>
+      <span class="sec-label">Aplicativos</span>
+      <div class="sec-line"></div>
+      <span class="sec-count">2 apps</span>
+    </div>
+    <div class="grid grid-2">
+
+      <a class="card" href="index_projetos.html" target="_blank" rel="noopener noreferrer">
+        <div class="ci verde">📐</div>
+        <div class="ct">
+          <div class="ct-title">Central de Projetos</div>
+          <div class="ct-sub">Registro e controle de projetos</div>
+        </div>
+        <span class="cbadge verde">App</span>
+        <div class="carr">↗</div>
+      </a>
+
+      <a class="card" href="index_validacao.html" target="_blank" rel="noopener noreferrer">
+        <div class="ci roxo">📋</div>
+        <div class="ct">
+          <div class="ct-title">Validação de Projetos</div>
+          <div class="ct-sub">Análise e validação de projetos Maxibell</div>
+        </div>
+        <span class="cbadge roxo">App</span>
+        <div class="carr">↗</div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ARQUIVOS -->
+  <div class="sec">
+    <div class="sec-hdr">
+      <span class="sec-icon">📁</span>
+      <span class="sec-label">Arquivos</span>
+      <div class="sec-line"></div>
+      <span class="sec-count">Google Drive</span>
+    </div>
+    <div class="grid grid-1">
+
+      <a class="card" href="https://drive.google.com/drive/folders/1Wxv270Mf0ahtmj6sIczT-D9zZMueTQDG?usp=drive_link" target="_blank" rel="noopener noreferrer">
+        <div class="ci amarel">📁</div>
+        <div class="ct">
+          <div class="ct-title">Arquivos de Projetos</div>
+          <div class="ct-sub">Google Drive · abre em nova aba</div>
+        </div>
+        <span class="cbadge drive">Drive</span>
+        <div class="carr">↗</div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ACESSO EXTERNO -->
+  <div class="sec">
+    <div class="sec-hdr">
+      <span class="sec-icon">🌐</span>
+      <span class="sec-label">Acesso Externo</span>
+      <div class="sec-line"></div>
+      <span class="sec-count">1 link</span>
+    </div>
+    <div class="grid grid-1">
+
+      <a class="card" href="https://portal.esquadgroup.com.br/" target="_blank" rel="noopener noreferrer">
+        <div class="ci laranj">🔗</div>
+        <div class="ct">
+          <div class="ct-title">Portal Esquad Group</div>
+          <div class="ct-sub">Sistema externo · abre em nova aba</div>
+        </div>
+        <span class="cbadge ext">Externo</span>
+        <div class="carr">↗</div>
+      </a>
+
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p><strong>MAXIBELL</strong> &nbsp;·&nbsp; Central Allana — Sistema Operacional Interno</p>
+</footer>
+
+<script>
+const dias  = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
+const meses = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+function update(){
+  const n=new Date(),h=n.getHours();
+  document.getElementById('clock').textContent=String(h).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0');
+  document.getElementById('heroDate').textContent=dias[n.getDay()]+', '+n.getDate()+' de '+meses[n.getMonth()]+' de '+n.getFullYear();
+  document.getElementById('heroGreet').textContent=h<12?'Bom dia ☀️':h<18?'Boa tarde 🌤️':'Boa noite 🌙';
+}
+update();setInterval(update,30000);
+</script>
+</body>
+</html>
